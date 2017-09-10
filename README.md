@@ -1,5 +1,5 @@
 # wordpress-docker-fullstack-dev
-Full docker development stack for Wordpress
+Full Docker Compose development stack for Wordpress
 
 ### **Services**:
 
