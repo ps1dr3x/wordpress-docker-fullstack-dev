@@ -1,0 +1,43 @@
+version: '2'
+services:
+  wordpress-dev:
+    build:
+      context: .
+      args:
+        HTTP_AUTH_ENABLED: 'false'
+        HTTP_AUTH_USER: 'changeme'
+        HTTP_AUTH_PASSWORD: 'changeme'
+        WORDPRESS_VERSION: '4.8.1'
+        WORDPRESS_SHA1: '5376cf41403ae26d51ca55c32666ef68b10e35a4'
+        WPCLI_VERSION: '1.2.1'
+        PHPUNIT_VERSION: '6.2.3'
+        XDEBUG_PORT: 9000
+    container_name: wordpress-dev
+    ports:
+      - 80:80
+      - 443:443
+      - 9000:9000
+    volumes:
+      - ./wordpress:/var/www/html/wordpress
+    links:
+      - mariadb-dev
+  mariadb-dev:
+    image: mariadb
+    container_name: mariadb-dev
+    environment:
+      MYSQL_ROOT_PASSWORD: 'changeme'
+      MYSQL_USER: 'changeme'
+      MYSQL_PASSWORD: 'changeme'
+      MYSQL_DATABASE: 'changeme'
+  phpmyadmin-dev:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-dev
+    links:
+      - mariadb-dev
+    ports:
+      - 8090:80
+    environment:
+      MYSQL_ROOT_PASSWORD: 'changeme'
+      MYSQL_USER: 'changeme'
+      MYSQL_PASSWORD: 'changeme'
+      PMA_HOST: 'mariadb'
