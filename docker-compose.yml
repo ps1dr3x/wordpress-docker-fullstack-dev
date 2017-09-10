@@ -40,4 +40,4 @@ services:
       MYSQL_ROOT_PASSWORD: 'changeme'
       MYSQL_USER: 'changeme'
       MYSQL_PASSWORD: 'changeme'
-      PMA_HOST: 'mariadb'
+      PMA_HOST: 'mariadb-dev'
