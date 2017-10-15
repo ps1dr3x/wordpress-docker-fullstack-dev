@@ -20,7 +20,7 @@ WORKDIR /var/www/html
 # Repository update, installation of needed/common packages, cleanup
 RUN apt-get update && \
     apt-get -y dist-upgrade && \
-    apt-get -y install curl net-tools ssl-cert nano vim tmux dos2unix less apache2 apache2-utils libapache2-mod-php php php-mysql php-xdebug php-curl mariadb-client && \
+    apt-get -y install curl net-tools ssl-cert nano vim tmux dos2unix less apache2 apache2-utils libapache2-mod-php php php-mysql php-xdebug php-curl composer mariadb-client && \
     apt-get clean && \
     rm -rf index.html /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
