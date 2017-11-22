@@ -1,5 +1,5 @@
 FROM debian:latest
-MAINTAINER Michele Federici (@ps1dr3x) <michele@federici.tech>
+LABEL maintainer="Michele Federici (@ps1dr3x) <michele@federici.tech>"
 
 # Args and env vars
 ARG HTTP_AUTH_ENABLED
@@ -9,7 +9,9 @@ ARG WORDPRESS_VERSION
 ARG WORDPRESS_SHA1
 ARG XDEBUG_PORT
 ARG WPCLI_VERSION
+ARG WPCLI_SHA1
 ARG PHPUNIT_VERSION
+ARG PHPUNIT_SHA1
 ENV WORDPRESS_VERSION ${WORDPRESS_VERSION}
 ENV WORDPRESS_SHA1 ${WORDPRESS_SHA1}
 ENV XDEBUG_PORT ${XDEBUG_PORT}
@@ -47,14 +49,16 @@ COPY wp-config.php tmp/wp-config.php
 
 # WordPress CLI
 RUN curl -L "https://github.com/wp-cli/wp-cli/releases/download/v${WPCLI_VERSION}/wp-cli-${WPCLI_VERSION}.phar" > /usr/bin/wp && \
+  echo $WPCLI_SHA1 /usr/bin/wp | sha1sum -c - && \
   chmod +x /usr/bin/wp
 
 # PHPUnit
 RUN curl -L "https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar" > /usr/bin/phpunit && \
+  echo $PHPUNIT_SHA1 /usr/bin/phpunit | sha1sum -c - && \
   chmod +x /usr/bin/phpunit
 
 # Xdebug port
-EXPOSE ${XDEBUG_PORT}
+EXPOSE $XDEBUG_PORT
 
 # Config/Run scripts
 COPY install.sh install.sh

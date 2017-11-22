@@ -27,14 +27,15 @@ Full Docker Compose development stack for Wordpress
 
 ### **Instructions**:
 
- - Set ENVs for MariaDB and phpMyAdmin in docker-compose.yml: 
+ - Set ENVs in .env file:
     - MYSQL_ROOT_PASSWORD
     - MYSQL_USER
     - MYSQL_PASSWORD
     - MYSQL_DATABASE
-    - Eventually enable http auth by setting HTTP_AUTH_ENABLED (to "true"), HTTP_AUTH_USER and HTTP_AUTH_PASSWORD
+    - Eventually enable http auth by setting HTTP_AUTH_ENABLED (to 'true'), HTTP_AUTH_USER and HTTP_AUTH_PASSWORD
     - Eventually change WORDPRESS_VERSION, WORDPRESS_SHA1, WPCLI_VERSION, PHPUNIT_VERSION and XDEBUG_PORT
  - Set DB_NAME, DB_USER, DB_PASSWORD and random Authentication Unique Keys (https://api.wordpress.org/secret-key/1.1/salt/) in wp-config.php
+ - `sudo docker-compose up`
 
 Wordpress will be available on localhost
 
