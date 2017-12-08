@@ -35,10 +35,14 @@ RUN if [ "${HTTP_AUTH_ENABLED}" = "true" ]; then \
       htpasswd -bc /etc/apache2/.htpasswd ${HTTP_AUTH_USER} ${HTTP_AUTH_PASSWORD} && \
       echo "=> Http auth enabled"; \
     else \
-      sed -i 's/AuthType/#AuthType/g' /etc/apache2/sites-available/000-default.conf && \
       sed -i 's/AuthName/#AuthName/g' /etc/apache2/sites-available/000-default.conf && \
+      sed -i 's/AuthType/#AuthType/g' /etc/apache2/sites-available/000-default.conf && \
       sed -i 's/AuthUserFile/#AuthUserFile/g' /etc/apache2/sites-available/000-default.conf && \
       sed -i 's/Require/#Require/g' /etc/apache2/sites-available/000-default.conf && \
+      sed -i 's/AuthName/#AuthName/g' /etc/apache2/sites-available/default-ssl.conf && \
+      sed -i 's/AuthType/#AuthType/g' /etc/apache2/sites-available/default-ssl.conf && \
+      sed -i 's/AuthUserFile/#AuthUserFile/g' /etc/apache2/sites-available/default-ssl.conf && \
+      sed -i 's/Require/#Require/g' /etc/apache2/sites-available/default-ssl.conf && \
       echo "=> Http auth not enabled"; \
     fi
 
