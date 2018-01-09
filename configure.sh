@@ -8,6 +8,7 @@ if [ ! -f apache_configured ]; then
   a2enconf fqdn
   a2enmod rewrite
   a2enmod ssl
+  a2enmod http2
   a2ensite 000-default
   a2ensite default-ssl
   touch apache_configured
