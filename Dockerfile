@@ -27,8 +27,8 @@ RUN apt-get update && \
     rm -rf index.html /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Apache sites conf
-COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+COPY configs/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY configs/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 
 # Http auth
 RUN if [ "${HTTP_AUTH_ENABLED}" = "true" ]; then \
@@ -49,7 +49,7 @@ RUN if [ "${HTTP_AUTH_ENABLED}" = "true" ]; then \
 # WordPress Configs
 RUN mkdir wordpress && \
     mkdir tmp
-COPY wp-config.php tmp/wp-config.php
+COPY configs/wp-config.php tmp/wp-config.php
 
 # WordPress CLI
 RUN curl -L "https://github.com/wp-cli/wp-cli/releases/download/v${WPCLI_VERSION}/wp-cli-${WPCLI_VERSION}.phar" > /usr/bin/wp && \
@@ -65,12 +65,12 @@ RUN curl -L "https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar" > /usr/bin
 EXPOSE $XDEBUG_PORT
 
 # Config/Run scripts
-COPY install.sh install.sh
-COPY configure.sh configure.sh
-COPY run.sh run.sh
-RUN chmod 755 install.sh configure.sh run.sh
-# Convert text files with DOS or Mac line endings to Unix line endings
-RUN dos2unix install.sh configure.sh run.sh
+COPY scripts/install.sh install.sh
+COPY scripts/configure.sh configure.sh
+COPY scripts/run.sh run.sh
+# Permissions and line endings conversion (compatibility)
+RUN chmod 755 install.sh configure.sh run.sh && \
+  dos2unix install.sh configure.sh run.sh
 
 # Let's go
 CMD ["./run.sh"]

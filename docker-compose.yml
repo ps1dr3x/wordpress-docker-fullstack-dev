@@ -22,6 +22,8 @@ services:
       - 9000:9000
     volumes:
       - ./wordpress:/var/www/html/wordpress
+    depends_on:
+      - mariadb-dev
     links:
       - mariadb-dev
   mariadb-dev:
@@ -37,12 +39,11 @@ services:
     restart: always
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin-dev
+    depends_on:
+      - mariadb-dev
     links:
       - mariadb-dev
     ports:
       - 8090:80
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      PMA_HOST: ${MYSQL_DATABASE}
+      PMA_HOST: ${PMA_HOST}
