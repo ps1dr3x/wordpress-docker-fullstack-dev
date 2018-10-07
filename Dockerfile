@@ -61,9 +61,6 @@ RUN curl -L "https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar" > /usr/bin
   echo $PHPUNIT_SHA1 /usr/bin/phpunit | sha1sum -c - && \
   chmod +x /usr/bin/phpunit
 
-# Xdebug port
-EXPOSE $XDEBUG_PORT
-
 # Config/Run scripts
 COPY scripts/install.sh install.sh
 COPY scripts/configure.sh configure.sh
