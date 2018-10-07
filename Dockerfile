@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:stretch
 LABEL authors="Michele Federici (@ps1dr3x) <michele@federici.tech>, Giovanni Contino (@micene09) <giovanni.contino09@gmail.com>"
 
 # Args and env vars
