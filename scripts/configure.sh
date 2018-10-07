@@ -20,7 +20,6 @@ fi
 if [ ! -f xdebug_configured ]; then
   echo "=> Xdebug is not configured yet, configuring Xdebug ..."
   echo "xdebug.remote_enable=1" >> /etc/php/7.0/mods-available/xdebug.ini
-  echo "xdebug.remote_host=localhost" >> /etc/php/7.0/mods-available/xdebug.ini
   echo "xdebug.remote_port=$XDEBUG_PORT" >> /etc/php/7.0/mods-available/xdebug.ini
   echo "xdebug.remote_autostart=true" >> /etc/php/7.0/mods-available/xdebug.ini
   echo "xdebug.remote_handler=dbgp" >> /etc/php/7.0/mods-available/xdebug.ini
@@ -33,7 +32,7 @@ fi
 # openssl
 if [ ! -f openssl_configured ]; then
   echo "=> Openssl is not configured yet, configuring Openssl ..."
-  echo "openssl.cafile=\"/etc/ssl/certs/ssl-cert-snakeoil.pem\"" >> /etc/php/apache2/php.ini
+  echo "openssl.cafile=\"/etc/ssl/certs/ssl-cert-snakeoil.pem\"" >> /etc/php/7.0/apache2/php.ini
   touch openssl_configured
 else
   echo "=> Openssl is already configured"

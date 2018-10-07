@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:stretch
 LABEL authors="Michele Federici (@ps1dr3x) <michele@federici.tech>, Giovanni Contino (@micene09) <giovanni.contino09@gmail.com>"
 
 # Args and env vars
@@ -60,9 +60,6 @@ RUN curl -L "https://github.com/wp-cli/wp-cli/releases/download/v${WPCLI_VERSION
 RUN curl -L "https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar" > /usr/bin/phpunit && \
   echo $PHPUNIT_SHA1 /usr/bin/phpunit | sha1sum -c - && \
   chmod +x /usr/bin/phpunit
-
-# Xdebug port
-EXPOSE $XDEBUG_PORT
 
 # Config/Run scripts
 COPY scripts/install.sh install.sh
